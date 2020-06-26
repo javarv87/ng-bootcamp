@@ -1,0 +1,19 @@
+<form [formGroup]="form" novalidate>
+  <input type="text" formControlName="title" placeholder="Title">
+  <div>
+    <input type="text" formControlName="task" (keyup.enter)="addNewTask(form)" placeholder="Add new task" required>
+    <span *ngIf="task.invalid && (task.dirty || task.touched)">{{getErrorMessage(task)}}</span>
+  </div>
+  <hr>
+  <div>
+    <input type="text" formControlName="email" placeholder="Enter your email">
+    <span *ngIf="email.errors?.emailInvalid && (email.dirty || email.touched)">Invalid email</span>
+  </div>
+  <div>
+    <input type="password" formControlName="password" placeholder="Enter your password">
+  </div>
+  <div>
+    <input type="password" formControlName="confirmPassword" placeholder="Confirm your password">
+    <span *ngIf="form.errors?.notequal">Password not match</span>
+  </div>
+</form>

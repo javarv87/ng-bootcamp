@@ -1,0 +1,3 @@
+<div *ngFor="let item of todoList">
+  <app-todo [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo>
+</div>

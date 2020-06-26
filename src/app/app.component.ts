@@ -6,5 +6,36 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'chat';
+  title = 'Welcome guys';
+  name = '';
+  idName = 'name';
+  array = [
+    {
+      id: 1,
+      name: 'Jav',
+      isActive: true
+    },
+    {
+      id: 2,
+      name: 'Luis',
+      isActive: false
+    },
+    {
+      id: 3,
+      name: 'Lalo',
+      isActive: true
+    },
+  ];
+
+  setName(name: string) {
+    this.name = name;
+  }
+
+  displayActiveOrNot(active) {
+    // return this.array.filter((item) => item.isActive === active);
+
+    return this.array.filter((item) => {
+      return item.isActive === active;
+    });
+  }
 }
