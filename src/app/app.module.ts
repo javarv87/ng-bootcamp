@@ -1,35 +1,22 @@
+// Angular imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
+// Routing
+import { AppRoutingModule } from './app-routing.module';
+
+// Components
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { MainService } from './services/main-service.service';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'signup',
-    component: SignupComponent
-  },
-  {
-    path: 'todolist',
-    component: TodoContainerComponent
-  }
-];
+// Services
+import { MainService } from './services/main-service.service';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -38,12 +25,13 @@ const routes: Routes = [
     TodoFormComponent,
     TodoContainerComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]
