@@ -6,6 +6,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { CanDeactivateSignupGuard } from './guards/can-deactivate-signup.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,16 +20,14 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: ':id',
-    component: LoginComponent
-  },
-  {
     path: 'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canDeactivate: [CanDeactivateSignupGuard]
   },
   {
     path: 'todolist',
-    component: TodoContainerComponent
+    component: TodoContainerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
