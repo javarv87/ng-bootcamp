@@ -1,4 +1,5 @@
-<app-todo-form></app-todo-form>
+<a routerLink="new-todo" class="btn btn-primary">New Todo</a>
+
 <div *ngFor="let item of todoList">
   <app-todo-item [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo-item>
 </div>

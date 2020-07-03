@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 
 import { MainService } from 'src/app/services/main-service.service';
 import { Todo } from './../../interfaces/todo';
-import { emailValidator, passwordMatch } from './../../utils/util';
 import { errors } from 'src/app/utils/errorsMsg';
 
 @Component({
@@ -26,17 +25,8 @@ export class TodoFormComponent implements OnInit {
   createForm(): FormGroup {
     return this.fb.group({
       title: '',
-      task: ['', [Validators.minLength(3), Validators.required]],
-      email: ['', [emailValidator]],
-      password: [''],
-      confirmPassword: ['']
-    }, {
-      validators: [passwordMatch]
+      task: ['', [Validators.minLength(3), Validators.required]]
     });
-  }
-
-  get email(): AbstractControl {
-    return this.form.get('email');
   }
 
   get task(): AbstractControl {

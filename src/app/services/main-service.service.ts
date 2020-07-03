@@ -3,24 +3,23 @@ import { Todo } from './../interfaces/todo';
 
 @Injectable()
 export class MainService {
-  private todoList: Todo[] = [];
+  private todoList: Todo[] = [
+    {
+      id: '1',
+      task: 'Have a class',
+      completed: true
+    },
+    {
+      id: '2',
+      task: 'Attend the meetings',
+      completed: false
+    }
+  ];
   lastId: number;
 
   constructor() {}
 
   getTodos() {
-    this.todoList = [
-      {
-        id: '1',
-        task: 'Have a class',
-        completed: true
-      },
-      {
-        id: '2',
-        task: 'Attend the meetings',
-        completed: false
-      }
-    ];
     return this.todoList;
   }
 
