@@ -1,3 +1,4 @@
+<app-todo-form></app-todo-form>
 <div *ngFor="let item of todoList">
-  <app-todo [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo>
+  <app-todo-item [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo-item>
 </div>

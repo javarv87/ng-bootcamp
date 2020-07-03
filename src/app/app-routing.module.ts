@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
 import { SignupComponent } from './components/signup/signup.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'todolist',
-    component: TodoContainerComponent,
+    loadChildren: () => import('./modules/todo/todo.module').then(m => m.TodoModule),
     canActivate: [AuthGuard]
   },
   {
@@ -36,7 +36,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      preloadingStrategy: PreloadAllModules
+    }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
