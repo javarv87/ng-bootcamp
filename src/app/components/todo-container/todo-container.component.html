@@ -1,5 +1,21 @@
 <a routerLink="new-todo" class="btn btn-primary">New Todo</a>
 
+<app-tabs>
+  <!--   <app-tab>
+    nuestro contenido
+  </app-tab> -->
+  <app-tab [title]="'All'">
+    tab 1
+  </app-tab>
+  <app-tab [title]="'Completed'">
+    tab 2
+  </app-tab>
+  <app-tab [title]="'Pending'">
+    tab 3
+  </app-tab>
+</app-tabs>
+
+
 <div *ngFor="let item of todoList">
   <app-todo-item [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo-item>
 </div>

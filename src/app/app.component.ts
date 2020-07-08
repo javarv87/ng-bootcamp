@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LoginService } from './services/login.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -27,6 +29,11 @@ export class AppComponent {
     },
   ];
 
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) { }
+
   setName(name: string) {
     this.name = name;
   }
@@ -37,5 +44,10 @@ export class AppComponent {
     return this.array.filter((item) => {
       return item.isActive === active;
     });
+  }
+
+  logout() {
+    this.loginService.isAuthenticated = false;
+    this.router.navigate(['login']);
   }
 }
