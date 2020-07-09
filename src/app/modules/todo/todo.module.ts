@@ -10,6 +10,7 @@ import { TodoFormComponent } from './../../components/todo-form/todo-form.compon
 import { TodoItemComponent } from './../../components/todo-item/todo-item.component';
 import { TabComponent } from '../../components/tab/tab.component';
 import { EmptyHrefDirective } from '../../directives/empty-href.directive';
+import { FilterPipe } from '../../pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmptyHrefDirective } from '../../directives/empty-href.directive';
     TodoItemComponent,
     TabsComponent,
     TabComponent,
-    EmptyHrefDirective
+    EmptyHrefDirective,
+    FilterPipe
   ],
   imports: [
     CommonModule,
