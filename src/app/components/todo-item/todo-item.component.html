@@ -1,3 +1,9 @@
-<input type="checkbox" name="completed">
-<div [id]="todoItem.id" style="display: inline-block; text-decoration: line-through;">{{todoItem.id}} {{todoItem.task }}</div>
-<button type="button" (click)="deleteItem(todoItem.id)" style="display: inline-block;">X</button>
+<div class="form-inline">
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" [id]="todoItem.id" [checked]="todoItem.completed" (change)="toggleTodo(todoItem)">
+    <label class="form-check-label" [attr.for]="todoItem.id" [class.done]="todoItem.completed">
+      {{todoItem.id}} {{todoItem.task }}
+    </label>
+    <button type="button" class="btn btn-danger" (click)="deleteItem(todoItem.id)" style="display: inline-block;">X</button>
+  </div>
+</div>

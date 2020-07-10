@@ -1,10 +1,12 @@
 <a routerLink="new-todo" class="btn btn-primary">New Todo</a>
 
-<app-tabs>
+<!-- <app-todo-form></app-todo-form> -->
+
+<app-tabs (seletectedTab)="onChangeTab($event)">
   <app-tab *ngFor="let tab of tabs" [title]="tab">
-    <div *ngFor="let item of todoList | filter:tab">
+<!--     <div *ngFor="let item of todoList | filter:tab">
       <app-todo-item [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo-item>
-    </div>
+    </div> -->
   </app-tab>
 
   <app-tab [title]="'ExampleRef'" id="allTodos" #allTodos>
@@ -14,3 +16,10 @@
 <div *ngIf="allTodos.active">
   Ejemplo de referencia
 </div>
+
+<app-todo-item
+  *ngFor="let item of todoList | filter:filterBy"
+  [todoItem]="item"
+  (deleteTaskById)="onDeleteTaskById($event)"
+  (updateTodo)="onUpdateTodo($event)">
+</app-todo-item>

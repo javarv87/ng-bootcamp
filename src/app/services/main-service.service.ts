@@ -36,4 +36,19 @@ export class MainService {
     this.todoList = this.todoList.filter((todo) =>  +todo.id !== +id);
     return this.todoList;
   }
+
+  updateTodo(todo: Todo) {
+    this.todoList = this.todoList.map((item) => {
+      if (+todo.id === +item.id) {
+        return {
+          ...item,
+          completed: todo.completed
+        };
+      } else {
+        return item;
+      }
+    });
+
+    return this.todoList;
+  }
 }

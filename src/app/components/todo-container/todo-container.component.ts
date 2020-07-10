@@ -11,6 +11,7 @@ import { MainService } from './../../services/main-service.service';
 export class TodoContainerComponent implements OnInit, AfterContentInit, AfterViewInit {
   @ViewChild('allTodos') allTodos: ElementRef;
   todoList: Todo[] = [];
+  filterBy = 'All';
   tabs: string[] = ['All', 'Completed', 'Pending'];
 
   constructor(
@@ -37,5 +38,13 @@ export class TodoContainerComponent implements OnInit, AfterContentInit, AfterVi
 
   onDeleteTaskById(id: string | number) {
     this.todoList = this.mainService.deleteById(id);
+  }
+
+  onUpdateTodo(todoItem: Todo) {
+    this.todoList = this.mainService.updateTodo(todoItem);
+  }
+
+  onChangeTab(currentTab) {
+    this.filterBy = currentTab.title;
   }
 }

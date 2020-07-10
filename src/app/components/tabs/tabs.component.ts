@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, AfterContentInit, Output, EventEmitter } from '@angular/core';
 import { TabComponent } from '../tab/tab.component';
 
 @Component({
@@ -8,6 +8,7 @@ import { TabComponent } from '../tab/tab.component';
 })
 export class TabsComponent implements OnInit, AfterContentInit {
   @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
+  @Output() seletectedTab: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
@@ -25,5 +26,6 @@ export class TabsComponent implements OnInit, AfterContentInit {
   onSelect(tab: TabComponent) {
     this.tabs.toArray().forEach(tabItem => tabItem.active = false);
     tab.active = true;
+    this.seletectedTab.emit(tab);
   }
 }

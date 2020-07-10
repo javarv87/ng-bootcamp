@@ -8,7 +8,8 @@ import { Todo } from '../../interfaces/todo';
 })
 export class TodoItemComponent implements OnInit {
   @Input() todoItem: Todo;
-  @Output() deleteTaskById = new EventEmitter<string | number>();
+  @Output() deleteTaskById: EventEmitter<string | number> = new EventEmitter<string | number>();
+  @Output() updateTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   constructor() {}
 
@@ -16,5 +17,10 @@ export class TodoItemComponent implements OnInit {
 
   deleteItem(id: string | number) {
     this.deleteTaskById.emit(id);
+  }
+
+  toggleTodo(todoItem: Todo) {
+    this.todoItem.completed = !todoItem.completed;
+    this.updateTodo.emit(todoItem);
   }
 }
