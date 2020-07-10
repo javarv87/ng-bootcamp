@@ -1,25 +1,16 @@
 <a routerLink="new-todo" class="btn btn-primary">New Todo</a>
 
-<!-- <app-todo-form></app-todo-form> -->
-
 <app-tabs (seletectedTab)="onChangeTab($event)">
-  <app-tab *ngFor="let tab of tabs" [title]="tab">
-<!--     <div *ngFor="let item of todoList | filter:tab">
-      <app-todo-item [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"></app-todo-item>
-    </div> -->
-  </app-tab>
-
-  <app-tab [title]="'ExampleRef'" id="allTodos" #allTodos>
-  </app-tab>
+  <app-tab *ngFor="let tab of tabs" [title]="tab"></app-tab>
 </app-tabs>
 
-<div *ngIf="allTodos.active">
-  Ejemplo de referencia
+<div *ngIf="todoList | filter:filterBy as results">
+  <div *ngIf="results.length; else noItems">
+    <app-todo-item *ngFor="let item of results" [todoItem]="item"
+      (deleteTaskById)="onDeleteTaskById($event)" (updateTodo)="onUpdateTodo($event)">
+    </app-todo-item>
+  </div>
+  <ng-template #noItems>
+    No items here!
+  </ng-template>
 </div>
-
-<app-todo-item
-  *ngFor="let item of todoList | filter:filterBy"
-  [todoItem]="item"
-  (deleteTaskById)="onDeleteTaskById($event)"
-  (updateTodo)="onUpdateTodo($event)">
-</app-todo-item>

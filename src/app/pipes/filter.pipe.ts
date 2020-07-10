@@ -1,11 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Todo } from './../interfaces/todo';
+import { MainService } from 'src/app/services/main-service.service';
 
 @Pipe({
   name: 'filter',
   pure: true
 })
 export class FilterPipe implements PipeTransform {
+  constructor(private mainService: MainService) { }
 
   transform(value: Todo[], args: string): Todo[] {
     let elements;

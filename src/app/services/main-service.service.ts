@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from './../interfaces/todo';
+import { of, Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class MainService {
@@ -15,7 +16,7 @@ export class MainService {
       completed: false
     }
   ];
-  lastId: number;
+  private lastId: number;
 
   constructor() {}
 

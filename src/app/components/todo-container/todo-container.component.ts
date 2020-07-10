@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, ChangeDetectorRef, AfterViewInit, OnChanges } from '@angular/core';
 
 import { Todo } from './../../interfaces/todo';
 import { MainService } from './../../services/main-service.service';
@@ -8,25 +9,15 @@ import { MainService } from './../../services/main-service.service';
   templateUrl: './todo-container.component.html',
   styleUrls: ['./todo-container.component.css']
 })
-export class TodoContainerComponent implements OnInit, AfterContentInit, AfterViewInit {
+export class TodoContainerComponent implements OnInit {
   @ViewChild('allTodos') allTodos: ElementRef;
   todoList: Todo[] = [];
   filterBy = 'All';
   tabs: string[] = ['All', 'Completed', 'Pending'];
 
   constructor(
-    private mainService: MainService,
-    private cd: ChangeDetectorRef
+    private mainService: MainService
   ) { }
-
-  ngAfterViewInit() {
-    // Solo como referencia para ustedes TabComponent
-    console.log(this.allTodos);
-  }
-
-  ngAfterContentInit() {
-    this.cd.detectChanges();
-  }
 
   ngOnInit(): void {
     this.getTodoList();
