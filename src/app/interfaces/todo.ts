@@ -5,9 +5,10 @@
 } */
 
 export class Todo {
-  id: string | number;
-  task = '';
+  id?: string | number;
+  title = '';
   completed = false;
+  userId: string | number;
 
   constructor(values: any = {}) {
     Object.assign(this, values);

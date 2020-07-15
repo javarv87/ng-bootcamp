@@ -2,6 +2,7 @@ import { TabsComponent } from './../../components/tabs/tabs.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TodoRoutingModule } from './todo-routing.module';
 
@@ -25,7 +26,8 @@ import { FilterPipe } from '../../pipes/filter.pipe';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    TodoRoutingModule
+    TodoRoutingModule,
+    HttpClientModule
   ]
 })
 export class TodoModule { }

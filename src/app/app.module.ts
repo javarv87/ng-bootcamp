@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 // Routing
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,8 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]

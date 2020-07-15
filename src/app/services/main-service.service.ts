@@ -1,41 +1,65 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { Todo } from './../interfaces/todo';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { errors } from '../utils/errorsMsg';
 
 @Injectable()
 export class MainService {
-  private todoList: Todo[] = [
-    {
-      id: '1',
-      task: 'Have a class',
-      completed: true
-    },
-    {
-      id: '2',
-      task: 'Attend the meetings',
-      completed: false
-    }
-  ];
-  private lastId: number;
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
-
-  getTodos() {
-    return this.todoList;
+  getTodoList(): Observable<Todo[]> {
+    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos').pipe(
+      catchError(this.handleError<Todo[]>('MainService -> getTodoList', []))
+    );
   }
 
-  addNewTodo(newTodo: Todo) {
+  getTodoListByFilter(value: string): Observable<Todo[]> {
+    return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos', {
+      params: {
+        completed: value
+      }
+    });
+  }
+
+  createTodoItem(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>('https://jsonplaceholder.typicode.com/todos', todo);
+  }
+
+  updateItem(todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, todo).pipe(
+      catchError(this.handleError<Todo>('MainService -> updateItem', todo))
+    );
+  }
+
+  deleteItem(todoId: string | number): Observable<Todo> {
+    return this.http.delete<Todo>(`https://jsonplaceholder.typicode.com/todos/${todoId}`);
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+
+      console.warn(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+
+/*   addNewTodo(newTodo: Todo) {
     this.lastId = (!!this.todoList.length) ? +this.todoList[this.todoList.length - 1].id : 0;
     if (!newTodo.id) {
       newTodo.id = ++this.lastId;
     }
-    newTodo.task = newTodo.task.trim();
+    newTodo.title = newTodo.title.trim();
     this.todoList.push(newTodo);
   }
 
   deleteById(id: string | number) {
     this.todoList = this.todoList.filter((todo) =>  +todo.id !== +id);
-    return this.todoList;
+    return of(this.todoList);
   }
 
   updateTodo(todo: Todo) {
@@ -50,6 +74,6 @@ export class MainService {
       }
     });
 
-    return this.todoList;
-  }
+    return of(this.todoList);
+  } */
 }

@@ -1,9 +1,8 @@
 <a routerLink="/todolist" class="btn btn-primary">Back to list</a>
 
 <form [formGroup]="form" novalidate>
-  <input type="text" formControlName="title" placeholder="Title">
   <div>
-    <input type="text" formControlName="task" (keyup.enter)="addNewTask(form)" placeholder="Add new task" required>
-    <span *ngIf="task.invalid && (task.dirty || task.touched)">{{getErrorMessage(task)}}</span>
+    <input type="text" formControlName="title" (keyup.enter)="addNewTask(form)" placeholder="Add new task" required>
+    <span *ngIf="title.invalid && (title.dirty || title.touched)">{{getErrorMessage(title)}}</span>
   </div>
 </form>

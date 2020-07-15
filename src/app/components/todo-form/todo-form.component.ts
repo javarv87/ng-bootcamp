@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 
 import { MainService } from 'src/app/services/main-service.service';
@@ -10,8 +11,9 @@ import { errors } from 'src/app/utils/errorsMsg';
   templateUrl: './todo-form.component.html',
   styleUrls: ['./todo-form.component.css']
 })
-export class TodoFormComponent implements OnInit {
+export class TodoFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  sub: Subscription;
 
   constructor(
     private mainService: MainService,
@@ -24,19 +26,20 @@ export class TodoFormComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.fb.group({
-      title: '',
-      task: ['', [Validators.minLength(3), Validators.required]]
+      userId: 11,
+      title: ['', [Validators.required]],
+      completed: [false]
     });
   }
 
-  get task(): AbstractControl {
-    return this.form.get('task');
+  get title(): AbstractControl {
+    return this.form.get('title');
   }
 
   addNewTask({ valid, value }: { valid: boolean, value: string }): void {
     if (valid) {
       const todo = new Todo(value);
-      this.mainService.addNewTodo(todo);
+      this.sub = this.mainService.createTodoItem(todo).subscribe(data => console.log(data));
       this.form.reset();
     }
   }
@@ -48,5 +51,11 @@ export class TodoFormComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

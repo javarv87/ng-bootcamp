@@ -4,7 +4,18 @@
   <app-tab *ngFor="let tab of tabs" [title]="tab"></app-tab>
 </app-tabs>
 
-<div *ngIf="todoList | filter:filterBy as results">
+<div *ngIf="(todoListAsync | async) | filter:filterBy as results">
+  <div *ngIf="results.length; else noItems">
+    <app-todo-item *ngFor="let item of results" [todoItem]="item" (deleteTaskById)="onDeleteTaskById($event)"
+      (updateTodo)="onUpdateTodo($event)">
+    </app-todo-item>
+  </div>
+  <ng-template #noItems>
+    No items here!
+  </ng-template>
+</div>
+
+<!-- <div *ngIf="todoList | filter:filterBy as results">
   <div *ngIf="results.length; else noItems">
     <app-todo-item *ngFor="let item of results" [todoItem]="item"
       (deleteTaskById)="onDeleteTaskById($event)" (updateTodo)="onUpdateTodo($event)">
@@ -13,4 +24,4 @@
   <ng-template #noItems>
     No items here!
   </ng-template>
-</div>
+</div> -->
